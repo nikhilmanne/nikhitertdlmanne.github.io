@@ -1,0 +1,224 @@
+<!-- Data Validation
+Data validation is the process of ensuring that user input is clean, correct, and useful.
+
+Typical validation tasks are:
+
+has the user filled in all required fields?
+has the user entered a valid date?
+has the user entered text in a numeric field?
+Most often, the purpose of data validation is to ensure correct user input.
+
+Validation can be defined by many different methods, and deployed in many different ways.
+
+Server side validation is performed by a web server, after input has been sent to the server.
+
+Client side validation is performed by a web browser, before input is sent to a web server. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript Form Validation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Kanit:ital@1&family=Merriweather:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Kanit:ital@1&family=Merriweather:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Kanit:ital@1&family=Merriweather:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
+
+        :root {
+    --main-bg-color: #2874f0;
+  }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: top;
+            align-items: center;
+            flex-direction: column;
+            background: #be4244;
+            background: -webkit-linear-gradient(to right, #FFEDBC, #ED4264);  
+            background: linear-gradient(to right, #FFEDBC, #1a1e58); 
+
+        }
+        form{
+       margin-top: 45px;
+
+        }
+
+
+        
+
+        input {
+            font-weight: 300;
+            border:none;
+            border-bottom: 1px solid black;
+            background: transparent;
+
+            border-radius: 5px;
+            padding: 0px 10px;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+     
+
+        .formdesign {
+            height: 39px;
+            width: 400px;
+            
+            display: block;
+           
+            margin: 15px 0px;
+        }
+        span{
+             color:red;
+        }
+       .but{
+        height: 20px;
+        width: 84px;
+        cursor: pointer;
+       }
+
+     
+       .but{
+        font-weight: 700;
+        height: 20px;
+        width: 84px;
+        cursor: pointer;
+       }
+      
+       h1{
+        font-size: 15PX;
+        font-family: 'Merriweather', serif;
+       }
+       footer{
+        border-radius: 9px;
+        background-color: whitesmoke;
+    margin-top: 186px;
+        font-weight: bolder;
+        
+     height: 18px;
+       }
+    </style>
+
+</head>
+
+<body>
+    <div class="container" style="background-image: url('tree.jpg');">
+       
+    <form aciton ="/myaction.php" name="myForm" onsubmit="return validateForm()" method="post">
+        <h1>Campaign form for save the trees</h1>
+        <div class="formdesign" id="name">
+            Name: <input type="text" name="fname" ><br>
+            <span class="formerror"> </span>
+        </div>
+
+        <div class="formdesign" id="email">
+            Email: <input type="email" name="femail" ><br>
+            <span class="formerror"> </span>
+        </div>
+
+        <div class="formdesign" id="phone">
+            Phone: <input type="phone" name="fphone" ><br>
+            <span class="formerror"></span>
+        </div>
+        <div class="formdesign" id="pass">
+            Password: <input type="password" name="fpass" ><br>
+            <span class="formerror"></span>
+        
+        </div>
+
+        <div class="formdesign" id="cpass">
+            Confirm Password: <input type="password" name="fcpass" ><br>
+            <span class="formerror"></span>
+        </div>
+
+        <input class="but" type="submit" value="Submit">
+        <input class="but" type="reset" value="reset">
+
+        
+
+    </form>
+    <footer>
+        @NIKHIL MANNE | USN NO. ME21D072 | MECHANICAL ENGINEERING |  SB JAIN INSTITUTE , NAGPUR
+    </footer>
+</div>
+
+
+</body>
+<script>
+    function clearErrors(){
+
+errors = document.getElementsByClassName('formerror');
+for(let item of errors)
+{
+    item.innerHTML = "";
+}
+
+
+}
+function seterror(id, error){
+
+element = document.getElementById(id);
+element.getElementsByClassName('formerror')[0].innerHTML = error;
+
+}
+
+function validateForm(){
+var returnval = true;
+clearErrors();
+
+
+var name = document.forms['myForm']["fname"].value;
+if (name.length==0){
+    seterror("name", "Please enter your name!");
+    returnval = false;
+}
+
+if (!isNaN(name)) {
+            seterror("name", "Please enter your valid name!");
+            returnval = false;
+        }
+
+var email = document.forms['myForm']["femail"].value;
+if (email.length==0){
+    seterror("email", "Please enter your email address!");
+    returnval = false;
+}
+
+
+if (isNaN(phone)||phone.length != 10) {
+            seterror("phone", "Please enter valid phone number!");
+            returnval = false;
+        }
+
+var password = document.forms['myForm']["fpass"].value;
+if (password.length < 6){
+
+    
+    seterror("pass", "Password should be atleast 6 characters long!");
+    returnval = false;
+}
+
+var cpassword = document.forms['myForm']["fcpass"].value;
+if (cpassword != password){
+    seterror("cpass", "Password and Confirm password should match!");
+    returnval = false;
+}
+
+return returnval;
+}
+
+
+
+</script>
+
+</html>
